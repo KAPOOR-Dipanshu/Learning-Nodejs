@@ -58,6 +58,11 @@ try {
 fs.cpSync('./test3.txt','./copy.txt')
 
 /*
-    unlinkSync gives you functionality to 
+    unlinkSync gives you functionality to delete a file from the directory
 */
 fs.unlinkSync('./test.txt')
+
+/*
+    statSync gives you functionality to analyse the stats of the file 
+*/
+console.log(fs.statSync('./test2.txt'))
