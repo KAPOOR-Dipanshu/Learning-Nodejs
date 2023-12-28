@@ -1,5 +1,6 @@
 const http = require("http");
-const fs = require('fs')
+const fs = require('fs');
+const url = require('url');
 
 /* 
    createServer is used to declare a http server so than we can 
@@ -7,14 +8,17 @@ const fs = require('fs')
    response in the call back under this function 
 */
 const myServer = http.createServer((req, res) => {
+  const myUrl = url.parse(req.url,true);
+  console.log(myUrl)
   const log = `${Date.now()} : ${req.url} : New request recieved \n`
   fs.appendFile('Logs.txt',log,(err,data) => {
-    switch (req.url) {
+    switch (myUrl.pathname) {
         case '/':
             res.end("You Are At Home");
             break;
         case '/about':
-            res.end("You Are At About");
+          const user_name = myUrl.query.user_name
+            res.end(`Here is everything about ${user_name}`);
             break;
         case '/hire':
             res.end("You Are At Hire");
