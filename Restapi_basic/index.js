@@ -1,11 +1,11 @@
 const express = require("express");
-const { MongoClient, ObjectId } = require("mongodb");
-const port = 3000;
-const mongoUrl =
-  "mongodb+srv://dipanshukapoor2002:Dipanshu4321@cluster0.ee31fyz.mongodb.net/";
+const env = require('dotenv').config();
+const { MongoClient } = require("mongodb");
+const PORT = process.env.PORT;
+const MONGO_URL = process.env.MONGO_URL;
 
 const app = express();
-const client = new MongoClient(mongoUrl, {
+const client = new MongoClient(MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -155,6 +155,6 @@ app.delete("/api/users/:id", async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${port}/users`);
 });
