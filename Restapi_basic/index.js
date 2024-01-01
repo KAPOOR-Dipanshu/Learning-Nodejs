@@ -138,6 +138,9 @@ app.get("/api/users/:id", async (req, res) => {
     .collection("learningNode")
     .find(queryFilters)
     .toArray();
+    if(!user){
+      return res.status(404).json({ message: "User id not find"});
+    }
     return res.status(200).json(user);
 });
 
